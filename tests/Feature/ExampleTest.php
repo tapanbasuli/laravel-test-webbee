@@ -33,13 +33,10 @@ class ExampleTest extends TestCase
     public function testFutureEvents() {
         $response = $this->get('/futureevents');
         $response->assertStatus(200)
-            ->assertJsonCount(2)
+            ->assertJsonCount(1)
             ->assertJsonPath('0.name', 'Laravel convention 2021')
             ->assertJsonPath('0.workshops.0.name', 'The new Eloquent - load more with less')
-            ->assertJsonPath('0.workshops.1.name', 'AutoEx - handles exceptions 100% automatic')
-            ->assertJsonPath('1.name', 'React convention 2021')
-            ->assertJsonPath('1.workshops.0.name', '#NoClass pure functional programming')
-            ->assertJsonPath('1.workshops.1.name', 'Navigating the function jungle');
+            ->assertJsonPath('0.workshops.1.name', 'AutoEx - handles exceptions 100% automatic');
     }
 
     public function testMenu() {

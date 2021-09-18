@@ -205,4 +205,9 @@ class EventsController extends BaseController
         return response()->json($result);
         //throw new \Exception('implement in coding task 2');
     }
+
+    public function getEvents(){
+        $events = Event::all();
+        return response()->json($events);
+    }
 }

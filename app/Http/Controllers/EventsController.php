@@ -97,7 +97,19 @@ class EventsController extends BaseController
      */
 
     public function getEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 1');
+        $result = array();
+        $events = Event::all();
+        foreach ($events as $e){
+            $result[] = array(
+                "id" => $e->id,
+                "name" => $e->name,
+                "created_at" => $e->created_at,
+                "updated_at" => $e->created_at,
+                "workshops" => $e->workshops
+            );
+        }
+        return response()->json($result);
+        //throw new \Exception('implement in coding task 1');
     }
 
 
@@ -176,6 +188,21 @@ class EventsController extends BaseController
      */
 
     public function getFutureEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 2');
+        $result = array();
+        $mytime = Date::now()->toDateTimeString();
+        $events = Event::whereHas('workshops', function($q) use($mytime){
+            $q->where('start', '>', $mytime);
+        })->get();
+        foreach ($events as $e){
+            $result[] = array(
+                "id" => $e->id,
+                "name" => $e->name,
+                "created_at" => $e->created_at,
+                "updated_at" => $e->created_at,
+                "workshops" => $e->workshops
+            );
+        }
+        return response()->json($result);
+        //throw new \Exception('implement in coding task 2');
     }
 }
